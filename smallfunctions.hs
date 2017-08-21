@@ -24,8 +24,31 @@ maximum' (x:xs)
     | otherwise = maxTail  
     where maxTail = maximum' xs 
 
+-- replicate redefine the built-in replicate function
+-- return an array by replicating the second argument,
+-- first argument times
+-- recursion using the otherwise while the n is not zero
+replicate' :: (Num i, Ord i) => i -> a -> [a]
+replicate' n x
+    | n <= 0    = []
+    | otherwise = x:replicate' (n-1) x
+
+-- take redefine the built-in take function
+-- if the first argument 0 or less than 0 its return empty array
+-- if the second argument empty array, return empty array
+-- _ means it doesn't care about the parameter, want to check the other
+-- otherwise the third pattern break into head and tail
+-- concatenat the heads until n element
+take' :: (Num i, Ord i) => i -> [a] -> [a]
+take' n _
+    | n <= 0 = []
+take' _ [] = []
+take' n (x:xs) = x : take' (n-1) xs
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
+    print (replicate' 12 22)
+    print (take' 3 [1,2,3,4,5])
 
 
