@@ -45,10 +45,32 @@ take' n _
 take' _ [] = []
 take' n (x:xs) = x : take' (n-1) xs
 
+-- zip redefine the built-in zip function
+-- first two argument handle the empty lists
+-- third pattern take the heads of the lists and
+-- create a tuple of them then call the zip to
+-- do it with the tail of the list
+zip' :: [a] -> [b] -> [(a,b)]
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+
+-- elem redefine the built-n elem function
+-- the first pattern handle empty list
+-- the second have guards, return True if the elem
+-- is the head of the list
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' a [] = False
+elem' a (x:xs)
+    | a == x    = True
+    | otherwise = a `elem'` xs
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
     print (replicate' 12 22)
     print (take' 3 [1,2,3,4,5])
+    print (zip' [1,2,3] [5,4,3])
+    print (elem' 3 [5,4,2,3])
 
 
