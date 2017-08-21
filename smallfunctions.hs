@@ -65,6 +65,18 @@ elem' a (x:xs)
     | a == x    = True
     | otherwise = a `elem'` xs
 
+-- quicksort implement the quicksort algorithm
+-- the first pattern check for empty array
+-- the second pattern get the head of the list, take the smaller
+-- and the bigger after and before then concat them,
+-- the smaller and bigger also sorted recursivly
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerSorted = quicksort [a | a <- xs, a <= x]
+        biggerSorted = quicksort [a | a <- xs, a > x]
+    in  smallerSorted ++ [x] ++ biggerSorted
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
@@ -72,5 +84,6 @@ main = do
     print (take' 3 [1,2,3,4,5])
     print (zip' [1,2,3] [5,4,3])
     print (elem' 3 [5,4,2,3])
+    print (quicksort [10,2,5,3,1,6,7,4,2,3,4,8,9])
 
 
