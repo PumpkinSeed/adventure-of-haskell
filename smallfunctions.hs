@@ -93,6 +93,13 @@ zipWith' _ [] _ = []
 zipWith' _ _ [] = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
+-- map redefine the bult-in map function
+-- takes a function as first argument and a list as second
+-- apply the function on the list elements
+map' :: (a -> b) -> [a] -> [b]  
+map' _ [] = []  
+map' f (x:xs) = f x : map f xs 
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
@@ -106,7 +113,8 @@ main = do
     -- too few parameters and it is created a new function on the fly
     let multTwoWithNine = multThree 9
     print (multTwoWithNine 2 3)
-
+    
     print (zipWith' (+) [4,4,3,6,7] [6,7,5,4,1])
+    print (map' (*4) [2,5,3,2,5])
 
 
