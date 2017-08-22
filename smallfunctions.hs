@@ -77,6 +77,22 @@ quicksort (x:xs) =
         biggerSorted = quicksort [a | a <- xs, a > x]
     in  smallerSorted ++ [x] ++ biggerSorted
 
+-- multThree get three parameter and multiple them
+multThree :: (Num a) => a -> a -> a -> a
+multThree x y z = x * y * z
+
+-- zipWith redefine the built-in zipWith function
+-- the first argument is a function which takes 3 argument
+-- the other arguments are lists and the response is also a list
+-- the first two pattern checks the lists are not empty
+-- the last pattern get the heads and the tails, and run the function
+-- what it got from paramter
+-- after pass it to itself recursivly
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
@@ -85,5 +101,12 @@ main = do
     print (zip' [1,2,3] [5,4,3])
     print (elem' 3 [5,4,2,3])
     print (quicksort [10,2,5,3,1,6,7,4,2,3,4,8,9])
+
+    -- multTwoWithNine create a new function because give
+    -- too few parameters and it is created a new function on the fly
+    let multTwoWithNine = multThree 9
+    print (multTwoWithNine 2 3)
+
+    print (zipWith' (+) [4,4,3,6,7] [6,7,5,4,1])
 
 
