@@ -96,9 +96,18 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 -- map redefine the bult-in map function
 -- takes a function as first argument and a list as second
 -- apply the function on the list elements
-map' :: (a -> b) -> [a] -> [b]  
-map' _ [] = []  
-map' f (x:xs) = f x : map f xs 
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map f xs
+
+-- takes a predicate as first argument, and a list as second
+-- in the guards if the predicate evaulate as true add x to the result
+-- otherwise just continue
+filter' :: (a -> Bool) -> [a] -> [a]  
+filter' _ [] = []  
+filter' p (x:xs)   
+    | p x       = x : filter p xs  
+    | otherwise = filter p xs  
 
 main = do
     print (cylinder 12.11 33.22)
@@ -116,5 +125,6 @@ main = do
     
     print (zipWith' (+) [4,4,3,6,7] [6,7,5,4,1])
     print (map' (*4) [2,5,3,2,5])
+    print (filter' (==2) [2,3,2,5,2,5,2,5])
 
 
