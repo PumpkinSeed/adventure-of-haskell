@@ -119,6 +119,11 @@ chain n
     | even n =  n:chain (n `div` 2)
     | odd n  =  n:chain (n*3 + 1)
 
+-- using lambda function the determine the predicate of the fileter
+-- in Haskell the lambda function is \
+numLongChains :: Int
+numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
@@ -137,5 +142,6 @@ main = do
     print (map' (*4) [2,5,3,2,5])
     print (filter' (==2) [2,3,2,5,2,5,2,5])
     print (chain 10)
+    print (numLongChains)
 
 
