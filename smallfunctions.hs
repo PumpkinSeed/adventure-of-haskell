@@ -103,11 +103,21 @@ map' f (x:xs) = f x : map f xs
 -- takes a predicate as first argument, and a list as second
 -- in the guards if the predicate evaulate as true add x to the result
 -- otherwise just continue
-filter' :: (a -> Bool) -> [a] -> [a]  
-filter' _ [] = []  
-filter' p (x:xs)   
-    | p x       = x : filter p xs  
-    | otherwise = filter p xs  
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' p (x:xs) 
+    | p x       = x : filter p xs
+    | otherwise = filter p xs
+
+-- get a number if it is one return one as an array
+-- if it is even, div with 2 and take it into the chain
+-- if it is odd, multiple with 3 and give it to 1 than take it into the chain
+-- do it with every new number while the new number is not 1
+chain :: (Integral a) => a -> [a]
+chain 1 = [1]
+chain n
+    | even n =  n:chain (n `div` 2)
+    | odd n  =  n:chain (n*3 + 1)
 
 main = do
     print (cylinder 12.11 33.22)
@@ -126,5 +136,6 @@ main = do
     print (zipWith' (+) [4,4,3,6,7] [6,7,5,4,1])
     print (map' (*4) [2,5,3,2,5])
     print (filter' (==2) [2,3,2,5,2,5,2,5])
+    print (chain 10)
 
 
