@@ -124,6 +124,13 @@ chain n
 numLongChains :: Int
 numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
 
+
+-- the fold is go trough the given list and using it's head and the start value
+-- do the operation (specified in the lambda function) on them
+-- get always two value where the first is alwazs the previous operation result
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+
 main = do
     print (cylinder 12.11 33.22)
     print (maximum' [10,11,12])
@@ -132,6 +139,7 @@ main = do
     print (zip' [1,2,3] [5,4,3])
     print (elem' 3 [5,4,2,3])
     print (quicksort [10,2,5,3,1,6,7,4,2,3,4,8,9])
+    print (sum' [1,2,3,4,5,9,8,7,6])
 
     -- multTwoWithNine create a new function because give
     -- too few parameters and it is created a new function on the fly
